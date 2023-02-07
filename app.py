@@ -38,30 +38,35 @@ def create_post(request:Request, name:str = Form(...),contact_number:str = Form(
     return templates.TemplateResponse("register.html",{"request":request,"msg":"Unable to register"})
 
 @app.post("/",response_class=HTMLResponse)
-def index_post(request:Request, email:str = Form(...), password:str=Form(...)):
-    users = db.executeQueryWithParams("select * from users where email =? and password=?", [email, password])[0]
-    request.session.setdefault("isLogin", True)
-    request.session.setdefault('email', users['email'])
-    request.session.setdefault('role', users['role'])
-    role = users['role']
-    
-    if role == 1:
-        return RedirectResponse("/FFdashboard", status_code=status.HTTP_302_FOUND)
-    else:
-        return RedirectResponse("/Tdashboard", status_code=status.HTTP_302_FOUND)
-        
-    if(len(users)==0):
-        return templates.TemplateResponse("login2.html",{"request":request, "msg":"invalid email and password" })
-    return RedirectResponse("/FFdashboard",status_code=status.HTTP_302_FOUND)
+def admin_login(request:Request, email:str = Form(...), password:str=Form(...)):
+    conn = sqlite3.connect("app.db")
+    cursor = conn.cursor()
 
-@app.post("/teacherlogin",response_class=HTMLResponse)
-def teacher_login(request:Request, email:str = Form(...), password:str=Form(...)):
-    users = db.executeQueryWithParams("select * from addteachers where email =? and password=?", [email, password])[0]
-    if not users:
+    # Retrieve the salt and hashed password for the user
+    cursor.execute('select * from users where email =? and password=?', (email,password,))
+    result = cursor.fetchone()
+    if not result:
         return templates.TemplateResponse("/login2.html", {"request": request, "msg": "Invalid Username or Password"})
     else:
         request.session.setdefault("isLogin", True)
-        request.session.setdefault('email', users['email'])
+        request.session.setdefault('email', email)
+        request.session.setdefault('role', 1)
+        return RedirectResponse("/FFdashboard", status_code=status.HTTP_302_FOUND)
+
+@app.post("/teacherlogin",response_class=HTMLResponse)
+def teacher_login(request:Request, email:str = Form(...), password:str=Form(...)):
+    
+    conn = sqlite3.connect("app.db")
+    cursor = conn.cursor()
+
+    # Retrieve the salt and hashed password for the user
+    cursor.execute('select * from addteachers where email =? and password=?', (email,password,))
+    result = cursor.fetchone()
+    if not result:
+        return templates.TemplateResponse("/login2.html", {"request": request, "msg": "Invalid Username or Password"})
+    else:
+        request.session.setdefault("isLogin", True)
+        request.session["email"] = email
         request.session.setdefault('role', 2)
         return RedirectResponse("/Tdashboard", status_code=status.HTTP_302_FOUND)
 
