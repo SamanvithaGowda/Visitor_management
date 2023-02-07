@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+    <link rel="icon" type="image/x-icon" href="/static/images/SCLogo.png">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-warning">
+      <div class="container-fluid">
+           <img src="/static/images/SCLogo.png" width="65" height="65"><h3>VISITOR MANAGEMENT</h3>
+          <form class="d-flex">
+
+            <div class="row align-items-center">
+              
+              <div class="col">
+                <a href="/Fregister">
+                <button type="button" class="btn btn-primary">
+                <img src="/static/images/baseline_person_add_black_24dp.png" width="30" height="30">ADD</button>
+                </a>
+              </div>
+              <div class="col">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+                  <img src="/static/images/baseline_account_circle_black_24dp.png" width="30" height="30">
+                  Profile
+                  </button>     
+              </div>
+            </div>
+      
+             
+              <!-- The Modal -->
+            <div class="modal" id="myModal">
+              <div class="modal-dialog modal-dialog-scrollable">
+               <div class="modal-content">
+
+               <!-- Modal Header -->
+               <div class="modal-header">
+                <h4 class="modal-title">Account</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+               </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                  <img src="{{pfp}}" class="img-thumbnail" width="100" height="100"alt="...">
+                  <div class="row-md">
+                    <div class="col-md-5">
+                    <p><b><u> NAME:</u> </b>{{ name }}
+                    </div>
+                  </div>
+                  <div class="row-md">
+                    <div class="col-md-5">
+                    <p><b><u> DEPARTMENT:</u></b>{{ department }}
+                    </div>
+                  </div>
+  
+                  <div class="row-md">
+                    <div class="col-md-12">
+                     <p><b><u>DATE OF BIRTH:</u></b> <span id="formattedDate"></span>
+                    </div>
+                  </div>
+                  <script>
+                    const date = "{{ date_of_birth }}"
+                    const dateArray = date.split("-");
+                    const formattedDate = dateArray[2] + "-" + dateArray[1] + "-" +dateArray[0];
+                    document.getElementById("formattedDate").innerHTML = formattedDate;
+                    
+                  </script>
+  
+                  <div class="row-md">
+                    <div class="col-md-12">
+                    <p><b><u>CONTACT NUMBER:</u></b>{{ contact_number }}
+                    </div>
+                  </div>
+               
+                  <div class="row-md">
+                    <div class="col-md-12">
+                     <p><b><u>EMAIL ID:</u></b> {{ email }}
+                    </div>
+                  </div>
+                </div>
+
+
+               <!-- Modal footer -->
+                <div class="modal-footer ">
+                  <a class="navbar-brand" href="/logout">
+                  
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Log Out</button>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+          </form>
+      </div>
+    </nav>
+   
+ 
+    <ul class="nav nav-tabs navbar-light bg-warning">
+      <li class="nav-item">
+        <a class="nav-link active" data-bs-toggle="tab" href="#Avisitors">Visitors</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/others">Employees</a>
+      </li>
+    </ul>
+
+
+   
+ 
+       <!--admin Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane container active" id="Avisitors">
+
+        <div class="container mt-3"> 
+          <div class="row">
+    
+             <ul class="nav nav-pills justify-content-center">
+             <li class="nav-item">
+               <a class="nav-link active" data-bs-toggle="tab" href="#Atotal"><b>Total Visitors</b><br><h3>{{ total_visitors }}</h3></a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" data-bs-toggle="tab" href="#Apersonal">Personal Visits<br><h3>{{ visitors_personal }}</h3></a>
+             </li>
+             <li class="nav-item">
+               <a class="nav-link" data-bs-toggle="tab" href="#Abusiness">Business Visits<br><h3>{{ visitors_business }}</h3></a>
+             </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+       <!-- admin diff visitors Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane container active" id="Atotal">
+  
+          <div class="container mt-3">                      
+            <table class="table table-light table-responsive">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th>Name</th>
+                  <th>Contact Number</th>
+                  <th>Email</th>
+                  <th>Date</th>
+                  <th>Time</th>
+                  <th>Whome To Meet</th>
+                  <th>purpose</th>
+                  <th>Reason</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for meetings in admin_meeting %}
+                    <tr>   
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{meetings.name}}</td>
+                        <td>{{meetings.contact_number}}</td>
+                        <td>{{meetings.email}}</td>
+                        <td>{{meetings.date}}</td>
+                        <td>{{meetings.time}}</td>
+                        <td>{{meetings.whome_to_meet}}</td>
+                        <td>{{meetings.purpose}}</td>
+                        <td>{{meetings.reason}}</td>
+
+                        {%if not meetings.status%}
+                        <td>
+                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                          <form action="/authorize?statuses=Accepted&id={{meetings.id}}" method="post">
+                            <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
+                          </form>
+                          <form action="/authorize?statuses=Rejected&id={{meetings.id}}" method="post">
+                            <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
+                          </form>
+                         
+                         </div> 
+                        </td>
+                        {% elif meetings.status == "Accepted" %}
+                        <td>
+                          Accepted
+                        </td>
+                        {% else %}
+                        <td>
+                          Rejected
+                        </td>
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                    
+
+                    
+              </tbody>
+            </table>
+          </div>
+        </div>
+      
+        <div class="tab-pane container fade" id="Apersonal">
+  
+          <div class="container mt-3"> 
+            <div class="row">
+               
+              <table class="table table-light table-responsive">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th>Name</th>
+                    <th>Contact Number</th>
+                    <th>Email</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Whome To Meet</th>
+                    <th>purpose</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for meetings in admin_meeting_personal %}
+                      <tr>   
+                          <th scope="row">{{ loop.index }}</th>
+                          <td>{{meetings.name}}</td>
+                          <td>{{meetings.contact_number}}</td>
+                          <td>{{meetings.email}}</td>
+                          <td>{{meetings.date}}</td>
+                          <td>{{meetings.time}}</td>
+                          <td>{{meetings.whome_to_meet}}</td>
+                          <td>{{meetings.purpose}}</td>
+                          <td>{{meetings.reason}}</td>
+                          <td>
+                            {%if not meetings.status%}
+                            <td>
+                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                              <form action="/authorize?statuses=Accepted&id={{meetings.id}}" method="post">
+                                <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
+                              </form>
+                              <form action="/authorize?statuses=Rejected&id={{meetings.id}}" method="post">
+                                <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
+                              </form>
+                             
+                             </div> 
+                            </td>
+                            {% elif meetings.status == "Accepted" %}
+                            <td>
+                              Accepted
+                            </td>
+                            {% else %}
+                            <td>
+                              Rejected
+                            </td>
+                            {% endif %}
+                        
+                      </tr>
+                      {% endfor %}
+                      
+  
+                      
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      
+        <div class="tab-pane container fade" id="Abusiness">
+  
+          <div class="container mt-3"> 
+            <div class="row">
+               
+              <table class="table table-light table-responsive">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th>Name</th>
+                    <th>Contact Number</th>
+                    <th>Email</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Whome To Meet</th>
+                    <th>purpose</th>
+                    <th>Reason</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for meetings in admin_meeting_business %}
+                      <tr>   
+                          <th scope="row">{{ loop.index }}</th>
+                          <td>{{meetings.name}}</td>
+                          <td>{{meetings.contact_number}}</td>
+                          <td>{{meetings.email}}</td>
+                          <td>{{meetings.date}}</td>
+                          <td>{{meetings.time}}</td>
+                          <td>{{meetings.whome_to_meet}}</td>
+                          <td>{{meetings.purpose}}</td>
+                          <td>{{meetings.reason}}</td>
+                          <td>
+                            {%if not meetings.status%}
+                            <td>
+                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                              <form action="/authorize?statuses=Accepted&id={{meetings.id}}" method="post">
+                                <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
+                              </form>
+                              <form action="/authorize?statuses=Rejected&id={{meetings.id}}" method="post">
+                                <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
+                              </form>
+                             
+                             </div> 
+                            </td>
+                            {% elif meetings.status == "Accepted" %}
+                            <td>
+                              Accepted
+                            </td>
+                            {% else %}
+                            <td>
+                              Rejected
+                            </td>
+                            {% endif %}
+                        
+                      </tr>
+                      {% endfor %}
+                      
+  
+                      
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    
+      
+     
+          
+    
+   
+    
+        
+    
+        
+          
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="/static/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+  </body>
+</html>
+
+
