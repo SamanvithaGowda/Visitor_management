@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     
     <title>Hello, world!</title> 
-    <link rel="icon" type="image/x-icon" href="/static/images/SCLogo.png">
+    <link rel="icon" type="image/x-icon" href="/static/images/Logo.png">
   </head>
   <body>
    
@@ -66,14 +66,14 @@
               
                 <tr>   
                   <th scope="row">{{ loop.index }}</th>
-                    <td>{{meetings.name}}</td>
-                    <td>{{meetings.contact_number}}</td>
-                    <td>{{meetings.email}}</td>
-                    <td>{{meetings.date}}</td>
-                    <td>{{meetings.time}}</td>
-                    <td>{{meetings.whom_to_meet}}</td>
-                    <td>{{meetings.purpose}}</td>
-                    <td>{{meetings.reason}}</td>
+                    <td>{{meetings[0]}}</td>
+                    <td>{{meetings[1]}}</td>
+                    <td>{{meetings[2]}}</td>
+                    <td>{{meetings[3]}}</td>
+                    <td>{{meetings[4]}}</td>
+                    <td>{{meetings[5]}}</td>
+                    <td>{{meetings[6]}}</td>
+                    <td>{{meetings[7]}}</td>
                    
                   
                 </tr>
@@ -89,7 +89,7 @@
   
     <div class="tab-pane container fade" id="Vpersonal">
 
-      <div class="container mt-3"> 
+      <div class="table-responsive"> 
         <div class="row">
            
           <table class="table table-light table-responsive">
@@ -111,14 +111,14 @@
               {% for meetings in teacher_meeting_personal %}
                   <tr>   
                      <th scope="row">{{ loop.index }}</th>
-                      <td>{{meetings.name}}</td>
-                      <td>{{meetings.contact_number}}</td>
-                      <td>{{meetings.email}}</td>
-                      <td>{{meetings.date}}</td>
-                      <td>{{meetings.time}}</td>
-                      <td>{{meetings.whom_to_meet}}</td>
-                      <td>{{meetings.purpose}}</td>
-                      <td>{{meetings.reason}}</td>
+                     <td>{{meetings[0]}}</td>
+                     <td>{{meetings[1]}}</td>
+                     <td>{{meetings[2]}}</td>
+                     <td>{{meetings[3]}}</td>
+                     <td>{{meetings[4]}}</td>
+                     <td>{{meetings[5]}}</td>
+                     <td>{{meetings[6]}}</td>
+                     <td>{{meetings[7]}}</td>
                   </tr>
                   {% endfor %}
                   
@@ -132,7 +132,7 @@
   
     <div class="tab-pane container fade" id="Vbusiness">
 
-      <div class="container mt-3"> 
+      <div class="table-responsive"> 
         <div class="row">
            
           <table class="table table-light table-responsive">
@@ -152,16 +152,16 @@
             </thead>
             <tbody>
               {% for meetings in teacher_meeting_business %}
-                  <tr>   
-                      <th scope="row">{{ loop.index }}</th>
-                      <td>{{meetings.name}}</td>
-                      <td>{{meetings.contact_number}}</td>
-                      <td>{{meetings.email}}</td>
-                      <td>{{meetings.date}}</td>
-                      <td>{{meetings.time}}</td>
-                      <td>{{meetings.whom_to_meet}}</td>
-                      <td>{{meetings.purpose}}</td>
-                      <td>{{meetings.reason}}</td>
+                  <tr>  
+                    <th scope="row">{{ loop.index }}</th> 
+                    <td>{{meetings[0]}}</td>
+                    <td>{{meetings[1]}}</td>
+                    <td>{{meetings[2]}}</td>
+                    <td>{{meetings[3]}}</td>
+                    <td>{{meetings[4]}}</td>
+                    <td>{{meetings[5]}}</td>
+                    <td>{{meetings[6]}}</td>
+                    <td>{{meetings[7]}}</td>
                     
                   </tr>
                   {% endfor %}

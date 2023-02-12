@@ -128,7 +128,6 @@ def FFdashboard(request:Request):
     date_of_birth = users['date_of_birth']
     pfp = users['pfp']
     whom_to_meet = name + " - " + department
-    print(whom_to_meet)
     if role == 1:
         #if status != None:
         #db.executeQueryWithParams("UPDATE register1 set status = ? where id =? ",[status,id])
@@ -205,23 +204,30 @@ def create(request:Request):
         
 
 @app.get("/others", response_class=HTMLResponse)
-def create(request:Request):
+def others(request:Request):
     email = request.session.get('email')
     conn = sqlite3.connect("app.db")
     cursor = conn.cursor()
-    department = cursor.execute("select department from users where email=? ",(email,))
-    cursor.execute("SELECT COUNT(*) FROM register1")
+    
+    cursor.execute("SELECT department FROM users WHERE email=?", (email,))
+    department = cursor.fetchone()[0]
+    
+    
+    cursor.execute("SELECT COUNT(*) FROM register1 WHERE whom_to_meet LIKE ? ORDER BY id DESC", ('% - ' + department,))
     total_visitors = cursor.fetchone()
         
-    cursor.execute("SELECT COUNT(*) FROM register1 where purpose ='Personal'")
+    cursor.execute("SELECT COUNT(*) FROM register1 WHERE whom_to_meet LIKE ? and purpose='Personal' ORDER BY id DESC", ('% - ' + department,))
     visitors_personal = cursor.fetchone()
         
-    cursor.execute("SELECT COUNT(*) FROM register1 where purpose ='Business'")
+    cursor.execute("SELECT COUNT(*) FROM register1 WHERE whom_to_meet LIKE ? and purpose='Business' ORDER BY id DESC", ('% - ' + department,))
     visitors_business = cursor.fetchone()
     
-    teacher_meeting = db.executeQuery("select * from register1 order by id DESC")
-    teacher_meeting_personal = db.executeQueryWithParams("select * from register1 where purpose =? order by id DESC", ["Personal"])
-    teacher_meeting_business = db.executeQueryWithParams("select * from register1 where purpose =? order by id DESC", ["Business"])
+    cursor.execute("SELECT * FROM register1 WHERE whom_to_meet LIKE ? ORDER BY id DESC", ('% - ' + department,))
+    teacher_meeting = cursor.fetchall()
+    cursor.execute("SELECT * FROM register1 WHERE whom_to_meet LIKE ? and purpose='Personal' ORDER BY id DESC", ('% - ' + department,))
+    teacher_meeting_personal = cursor.fetchall()
+    cursor.execute("SELECT * FROM register1 WHERE whom_to_meet LIKE ? and purpose='Business' ORDER BY id DESC", ('% - ' + department,))
+    teacher_meeting_business = cursor.fetchall()
     orders = db.executeQuery("select * from register1 order by id DESC")
     return templates.TemplateResponse("others.html",{"request":request,"orders":orders, "teacher_meeting":teacher_meeting, "teacher_meeting_personal":teacher_meeting_personal, "teacher_meeting_business":teacher_meeting_business,  "total_visitors":total_visitors[0], "visitors_personal": visitors_personal[0], "visitors_business":visitors_business[0]})
 
