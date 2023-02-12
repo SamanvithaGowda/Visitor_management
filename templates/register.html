@@ -63,6 +63,20 @@
                  <input type="text" name="name" class="form-control" id="inputName" required>
                 </div>
               </div>
+              <script>
+                function validateContactNumber(input) {
+    const contactNumber = input.value;
+    const contactNumberError = document.getElementById('contactNumberError');
+    const valid = /^\d{10}$/.test(contactNumber);
+    if (valid) {
+      contactNumberError.textContent = '';
+      input.setCustomValidity('');
+    } else {
+      contactNumberError.textContent = 'Contact number must be exactly 10 digits';
+      input.setCustomValidity('Contact number must be exactly 10 digits');
+    }
+  }
+              </script>
 
               <div class="row-md">
                 <div class="col-md-5">
