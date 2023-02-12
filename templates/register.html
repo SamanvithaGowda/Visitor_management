@@ -100,6 +100,9 @@
                   {% for teacher in teachers %}
                     <option value="{{teacher.name}} - {{teacher.department}}"> {{teacher.name}} - {{teacher.department}} </option>
                   {% endfor %}
+                  {% for admin in admins %}
+                    <option value="{{admin.name}} - {{admin.department}}"> {{admin.name}} - {{admin.department}} </option>
+                  {% endfor %}
                   </select>  
                 </div>
               </div> 

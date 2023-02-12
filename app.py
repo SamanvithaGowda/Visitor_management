@@ -127,7 +127,8 @@ def FFdashboard(request:Request):
     contact_number = users['contact_number']
     date_of_birth = users['date_of_birth']
     pfp = users['pfp']
-    
+    whom_to_meet = name + " - " + department
+    print(whom_to_meet)
     if role == 1:
         #if status != None:
         #db.executeQueryWithParams("UPDATE register1 set status = ? where id =? ",[status,id])
@@ -135,27 +136,33 @@ def FFdashboard(request:Request):
         cursor = conn.cursor()
         admin= cursor.execute("SELECT * FROM users where email=?", (email,))
 
-        cursor.execute("SELECT COUNT(*) FROM register1 where email =?", (email,))
+        cursor.execute("SELECT COUNT(*) FROM register1 where whom_to_meet =?", (whom_to_meet,))
         total_visitors = cursor.fetchone()
         
-        cursor.execute("SELECT COUNT(*) FROM register1 where email =? and purpose ='Personal'",(email,))
+        cursor.execute("SELECT COUNT(*) FROM register1 where whom_to_meet =? and purpose ='Personal'",(whom_to_meet,))
         visitors_personal = cursor.fetchone()
         
-        cursor.execute("SELECT COUNT(*) FROM register1 where email =? and purpose ='Business'",(email,))
+        cursor.execute("SELECT COUNT(*) FROM register1 where whom_to_meet =? and purpose ='Business'",(whom_to_meet,))
         visitors_business = cursor.fetchone()
 
-        admin_meeting = db.executeQueryWithParams("select * from register1 where email =? order by id DESC", [email])
-        admin_meeting_personal = db.executeQueryWithParams("select * from register1 where email =? and purpose =? order by id DESC", [email,"Personal"])
-        admin_meeting_business = db.executeQueryWithParams("select * from register1 where email =? and purpose =? order by id DESC", [email,"Business"])
+        admin_meeting = db.executeQueryWithParams("select * from register1 where whom_to_meet =? order by id DESC", [whom_to_meet])
+        admin_meeting_personal = db.executeQueryWithParams("select * from register1 where whom_to_meet =? and purpose =? order by id DESC", [whom_to_meet,"Personal"])
+        admin_meeting_business = db.executeQueryWithParams("select * from register1 where whom_to_meet =? and purpose =? order by id DESC", [whom_to_meet,"Business"])
         orders = db.executeQuery("select * from register1 order by id DESC")
         return templates.TemplateResponse("FFdashboard.html",{"request":request, "orders": orders, "admin_meeting": admin_meeting, "admin_meeting_personal": admin_meeting_personal, "admin_meeting_business":  admin_meeting_business, "email":email, "admin": admin, "total_visitors":total_visitors[0], "visitors_personal": visitors_personal[0], "visitors_business":visitors_business[0], "name": name, "department": department, "date_of_birth": date_of_birth, "contact_number":contact_number, "pfp": pfp})
     else:
         return "Unauthorized Access"
     
-@app.post("/authorize", response_class=HTMLResponse)
+@app.post("/Aauthorize", response_class=HTMLResponse)
+def authorize(request:Request, statuses:str=Query(None),id:int=Query(None)):    
+    db.executeQueryWithParams("UPDATE register1 set status = ? where id =? ",[statuses,id])
+    return RedirectResponse('/FFdashboard', status_code=status.HTTP_302_FOUND)
+
+@app.post("/Tauthorize", response_class=HTMLResponse)
 def authorize(request:Request, statuses:str=Query(None),id:int=Query(None)):    
     db.executeQueryWithParams("UPDATE register1 set status = ? where id =? ",[statuses,id])
     return RedirectResponse('/Tdashboard', status_code=status.HTTP_302_FOUND)
+
 
 
 
@@ -199,10 +206,10 @@ def create(request:Request):
 
 @app.get("/others", response_class=HTMLResponse)
 def create(request:Request):
-    
+    email = request.session.get('email')
     conn = sqlite3.connect("app.db")
     cursor = conn.cursor()
-    
+    department = cursor.execute("select department from users where email=? ",(email,))
     cursor.execute("SELECT COUNT(*) FROM register1")
     total_visitors = cursor.fetchone()
         
@@ -233,7 +240,8 @@ def create(request:Request):
 @app.get("/register", response_class=HTMLResponse)
 def create(request:Request):
     teachers = db.executeQuery("select * from addteachers")
-    return templates.TemplateResponse("register.html",{"request":request, "teachers": teachers})
+    admins = db.executeQuery("select * from users")
+    return templates.TemplateResponse("register.html",{"request":request, "teachers": teachers, "admins":admins})
 
 @app.get("/check-status", response_class=HTMLResponse)
 def check_status(request:Request):

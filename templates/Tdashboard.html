@@ -141,14 +141,14 @@
                     <td>{{order[5]}}</td>
                     <td>{{order[6]}}</td>
                     <td>{{order[7]}}</td>
-                    <td>
+                    
                       {%if not order[9] %}
                       <td>
                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                        <form action="/authorize?statuses=Accepted&id={{order[10]}}" method="post">
+                        <form action="/Tauthorize?statuses=Accepted&id={{order[10]}}" method="post">
                           <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
                         </form>
-                        <form action="/authorize?statuses=Rejected&id={{order[10]}}" method="post">
+                        <form action="/Tauthorize?statuses=Rejected&id={{order[10]}}" method="post">
                           <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
                         </form>
                        
@@ -163,7 +163,7 @@
                         Rejected
                       </td>
                       {% endif %}
-
+                    
                     
                     
               </th>
@@ -215,10 +215,10 @@
                       <td>{{order[7]}}</td>
                       <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                         <form action="/authorize?statuses=Accepted&id={{order.id}}" method="post">
+                         <form action="/Tauthorize?statuses=Accepted&id={{order.id}}" method="post">
                            <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
                          </form>
-                         <form action="/authorize?statuses=Rejected&id={{order.id}}" method="post">
+                         <form action="/Tauthorize?statuses=Rejected&id={{order.id}}" method="post">
                            <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
                          </form>
                         
@@ -273,10 +273,10 @@
                       <td>{{order[7]}}</td>
                       <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                         <form action="/authorize?statuses=Accepted&id={{order.id}}" method="post">
+                         <form action="/Tauthorize?statuses=Accepted&id={{order.id}}" method="post">
                            <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
                          </form>
-                         <form action="/authorize?statuses=Rejected&id={{order.id}}" method="post">
+                         <form action="/Tauthorize?statuses=Rejected&id={{order.id}}" method="post">
                            <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
                          </form>
                         

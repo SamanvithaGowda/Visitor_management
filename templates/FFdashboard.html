@@ -171,10 +171,10 @@
                         {%if not meetings.status%}
                         <td>
                          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                          <form action="/authorize?statuses=Accepted&id={{meetings.id}}" method="post">
+                          <form action="/Aauthorize?statuses=Accepted&id={{meetings.id}}" method="post">
                             <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
                           </form>
-                          <form action="/authorize?statuses=Rejected&id={{meetings.id}}" method="post">
+                          <form action="/Aauthorize?statuses=Rejected&id={{meetings.id}}" method="post">
                             <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
                           </form>
                          
@@ -231,28 +231,27 @@
                           <td>{{meetings.whom_to_meet}}</td>
                           <td>{{meetings.purpose}}</td>
                           <td>{{meetings.reason}}</td>
+                          {%if not meetings.status%}
                           <td>
-                            {%if not meetings.status%}
-                            <td>
-                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                              <form action="/authorize?statuses=Accepted&id={{meetings.id}}" method="post">
-                                <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
-                              </form>
-                              <form action="/authorize?statuses=Rejected&id={{meetings.id}}" method="post">
-                                <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
-                              </form>
-                             
-                             </div> 
-                            </td>
-                            {% elif meetings.status == "Accepted" %}
-                            <td>
-                              Accepted
-                            </td>
-                            {% else %}
-                            <td>
-                              Rejected
-                            </td>
-                            {% endif %}
+                           <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <form action="/Aauthorize?statuses=Accepted&id={{meetings.id}}" method="post">
+                              <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
+                            </form>
+                            <form action="/Aauthorize?statuses=Rejected&id={{meetings.id}}" method="post">
+                              <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
+                            </form>
+                           
+                           </div> 
+                          </td>
+                          {% elif meetings.status == "Accepted" %}
+                          <td>
+                            Accepted
+                          </td>
+                          {% else %}
+                          <td>
+                            Rejected
+                          </td>
+                          {% endif %}
                         
                       </tr>
                       {% endfor %}
@@ -297,29 +296,27 @@
                           <td>{{meetings.whom_to_meet}}</td>
                           <td>{{meetings.purpose}}</td>
                           <td>{{meetings.reason}}</td>
+                          {%if not meetings.status%}
                           <td>
-                            {%if not meetings.status%}
-                            <td>
-                             <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                              <form action="/authorize?statuses=Accepted&id={{meetings.id}}" method="post">
-                                <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
-                              </form>
-                              <form action="/authorize?statuses=Rejected&id={{meetings.id}}" method="post">
-                                <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
-                              </form>
-                             
-                             </div> 
-                            </td>
-                            {% elif meetings.status == "Accepted" %}
-                            <td>
-                              Accepted
-                            </td>
-                            {% else %}
-                            <td>
-                              Rejected
-                            </td>
-                            {% endif %}
-                        </th>
+                           <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <form action="/Aauthorize?statuses=Accepted&id={{meetings.id}}" method="post">
+                              <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
+                            </form>
+                            <form action="/Aauthorize?statuses=Rejected&id={{meetings.id}}" method="post">
+                              <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
+                            </form>
+                           
+                           </div> 
+                          </td>
+                          {% elif meetings.status == "Accepted" %}
+                          <td>
+                            Accepted
+                          </td>
+                          {% else %}
+                          <td>
+                            Rejected
+                          </td>
+                          {% endif %}
                       </tr>
                       {% endfor %}
                       
