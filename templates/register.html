@@ -23,7 +23,7 @@
 
 /* styles for the input fields */
 #date-time-picker input {
-  width: 125px;
+  width: 300px;
   height: 38px;
   font-size: 16px;
   margin-right: 16px;
@@ -60,21 +60,21 @@
               <div class="row-md">
                 <div class="col-md-5">
                  <label for="inputName" class="form-label">Name</label>
-                 <input type="text" name="name" class="form-control" id="inputName">
+                 <input type="text" name="name" class="form-control" id="inputName" required>
                 </div>
               </div>
 
               <div class="row-md">
                 <div class="col-md-5">
                  <label for="inputContactNumber" class="form-label">Contact Number</label>
-                 <input type="text" name="contact_number" class="form-control" id="inputContactNumber">
+                 <input type="text" name="contact_number" class="form-control" id="inputContactNumber" required>
                 </div>
               </div>
 
               <div class="row-md">
                 <div class="col-md-5">
                  <label for="inputEmail" class="form-label">Email</label>
-                 <input type="email" name="email" class="form-control" id="inputEmail">
+                 <input type="email" name="email" class="form-control" id="inputEmail" required>
                 </div>
               </div>
 
@@ -83,8 +83,8 @@
                 <div class="col-md-5">
                   <label for="inputDate" class="form-label">Date & Time</label>
                   <div id="date-time-picker">
-                  <input type="date" name="date" class="form-control" id="date-input">
-                  <input type="time" name="time" class="form-control" id="time-input">
+                  <input type="date" name="date" class="form-control" id="date-input" required>
+                  <input type="time" name="time" class="form-control" id="time-input" required>
                   </div>
                 </div>
               </div>
@@ -93,9 +93,9 @@
              
 
               <div class="row-md">
-                <div class="col-md-3">
+                <div class="col-md-4">
                   <label for="inputState" class="form-label">Whom To Meet</label>
-                  <select id="inputState" name="whom_to_meet" class="form-select select2">
+                  <select id="inputState" name="whom_to_meet" class="form-select select2" required>
                     <option selected>Choose...</option>
                   {% for teacher in teachers %}
                     <option value="{{teacher.name}} - {{teacher.department}}"> {{teacher.name}} - {{teacher.department}} </option>
@@ -107,7 +107,7 @@
               <div class="row-md">
                 <div class="col-md-5">
                   <label for="inputReasons" class="form-label">Purpose</label> 
-                  <select id="inputState" name="purpose" class="form-select">
+                  <select id="inputState" name="purpose" class="form-select" required>
                     <option selected>Choose...</option>
                    <option>Personal</option>
                    <option>Business</option>
@@ -118,7 +118,7 @@
               <div class="row-md">
                 <div class="col-md-5"> 
                     <label for="floatingTextarea2" class="form-label">Reason</label>
-                    <textarea class="form-control" type="text" name="reason" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>                
+                    <textarea class="form-control" type="text" name="reason" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" required></textarea>                
                 </div>
               </div>
 

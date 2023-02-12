@@ -164,7 +164,7 @@
                         <td>{{meetings.email}}</td>
                         <td>{{meetings.date}}</td>
                         <td>{{meetings.time}}</td>
-                        <td>{{meetings.whome_to_meet}}</td>
+                        <td>{{meetings.whom_to_meet}}</td>
                         <td>{{meetings.purpose}}</td>
                         <td>{{meetings.reason}}</td>
 
@@ -228,7 +228,7 @@
                           <td>{{meetings.email}}</td>
                           <td>{{meetings.date}}</td>
                           <td>{{meetings.time}}</td>
-                          <td>{{meetings.whome_to_meet}}</td>
+                          <td>{{meetings.whom_to_meet}}</td>
                           <td>{{meetings.purpose}}</td>
                           <td>{{meetings.reason}}</td>
                           <td>
@@ -288,13 +288,13 @@
                 <tbody>
                   {% for meetings in admin_meeting_business %}
                       <tr>   
-                          <th scope="row">{{ loop.index }}</th>
+                        <th scope="row">{{ loop.index }}</th>
                           <td>{{meetings.name}}</td>
                           <td>{{meetings.contact_number}}</td>
                           <td>{{meetings.email}}</td>
                           <td>{{meetings.date}}</td>
                           <td>{{meetings.time}}</td>
-                          <td>{{meetings.whome_to_meet}}</td>
+                          <td>{{meetings.whom_to_meet}}</td>
                           <td>{{meetings.purpose}}</td>
                           <td>{{meetings.reason}}</td>
                           <td>
@@ -319,7 +319,7 @@
                               Rejected
                             </td>
                             {% endif %}
-                        
+                        </th>
                       </tr>
                       {% endfor %}
                       

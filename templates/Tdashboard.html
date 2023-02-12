@@ -121,7 +121,7 @@
                 <th>Email</th>
                 <th>Date</th>
                 <th>Time</th>
-                <th>Whome To Meet</th>
+                <th>Whom To Meet</th>
                 <th>Purpose</th>
                 <th>reason</th>
                 <th>status</th>
@@ -142,20 +142,33 @@
                     <td>{{order[6]}}</td>
                     <td>{{order[7]}}</td>
                     <td>
-                      <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                       <form action="/authorize?status=Accepted&id={{order.id}}" method="post">
-                         <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
-                       </form>
-                       <form action="/authorize?status=Rejected&id={{order.id}}" method="post">
-                         <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
-                       </form>
-                      
-                      </div> 
-                     </td>
+                      {%if not order[9] %}
+                      <td>
+                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <form action="/authorize?statuses=Accepted&id={{order[10]}}" method="post">
+                          <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
+                        </form>
+                        <form action="/authorize?statuses=Rejected&id={{order[10]}}" method="post">
+                          <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
+                        </form>
+                       
+                       </div> 
+                      </td>
+                      {% elif order[9] == "Accepted" %}
+                      <td>
+                        Accepted
+                      </td>
+                      {% else %}
+                      <td>
+                        Rejected
+                      </td>
+                      {% endif %}
+
                     
-                  </th>
-                </tr>
-                {% endfor %}
+                    
+              </th>
+              </tr>
+              {% endfor %}
               </tbody>
            
             
@@ -180,7 +193,7 @@
                   <th>Email</th>
                   <th>Date</th>
                   <th>Time</th>
-                  <th>Whome To Meet</th>
+                  <th>Whom To Meet</th>
                   <th>Purpose</th>
                   <th>reason</th>
                   <th>status</th>
@@ -202,10 +215,10 @@
                       <td>{{order[7]}}</td>
                       <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                         <form action="/authorize?status=Accepted&id={{order.id}}" method="post">
+                         <form action="/authorize?statuses=Accepted&id={{order.id}}" method="post">
                            <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
                          </form>
-                         <form action="/authorize?status=Rejected&id={{order.id}}" method="post">
+                         <form action="/authorize?statuses=Rejected&id={{order.id}}" method="post">
                            <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
                          </form>
                         
@@ -238,7 +251,7 @@
                   <th>Email</th>
                   <th>Date</th>
                   <th>Time</th>
-                  <th>Whome To Meet</th>
+                  <th>Whom To Meet</th>
                   <th>Purpose</th>
                   <th>reason</th>
                   <th>status</th>
@@ -260,10 +273,10 @@
                       <td>{{order[7]}}</td>
                       <td>
                         <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                         <form action="/authorize?status=Accepted&id={{order.id}}" method="post">
+                         <form action="/authorize?statuses=Accepted&id={{order.id}}" method="post">
                            <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
                          </form>
-                         <form action="/authorize?status=Rejected&id={{order.id}}" method="post">
+                         <form action="/authorize?statuses=Rejected&id={{order.id}}" method="post">
                            <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
                          </form>
                         
