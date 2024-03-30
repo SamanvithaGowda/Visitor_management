@@ -25,10 +25,7 @@
         </div>
     </nav>
 
-    <div class="card text-center">
-        <div class="card-header">
-          Featured
-        </div>
+    <div class="card text-center">  
         <div class="card-body">
           <h5 class="card-title">VISITOR</h5>
           <form action="/check-status" method="post">
@@ -38,25 +35,25 @@
                  <input type="text" name="phone" class="form-control mx-auto" id="inputContactNumber" required>
                 </div>
             </div>
-       
-          <button type="submit" class="btn btn-primary mt-3">CHECK</a>
-        </form>
+              <button type="submit" class="btn btn-primary mt-3">CHECK</a>
+          </form>
         </div>
-        <div class="card-footer ">
-          <div class="row-md">
-            <div class="col-md-3">
+        
+    </div>
+
+    <div class="card text-center">
+      
+      <div class="card-body">
             {%for appointment in status_check%}
                 Email: {{ appointment.email }}
-                
                 <br>
-
                 Status: {{ appointment.status }}
-                
+                <br>
+                Meeting Time: {{ appointment.time }}
             {% endfor %}
-            </div>
-        </div>
-        </div>
       </div>
+      
+    </div>
 
 
 

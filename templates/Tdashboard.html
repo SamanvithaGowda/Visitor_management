@@ -110,7 +110,7 @@
     <div class="tab-content">
       <div class="tab-pane container active" id="home">
 
-        <div class="container mt-3">      
+        <div class="table-responsive">      
           <div class="table-resposnsive">            
           <table class="table table-light table-hover">
             <thead>
@@ -127,20 +127,21 @@
                 <th>status</th>
               </tr>
             </thead>
+
             <tbody>
               <tr>
                 <tbody>
-                {% for order in orders %}
-                <tr>
-                  <th scope="row">{{ loop.index }}</th>
-                    <td>{{order[0]}}</td>
-                    <td>{{order[1]}}</td>
-                    <td>{{order[2]}}</td>
-                    <td>{{order[3]}}</td>
-                    <td>{{order[4]}}</td>
-                    <td>{{order[5]}}</td>
-                    <td>{{order[6]}}</td>
-                    <td>{{order[7]}}</td>
+                  {% for order in orders %}
+                  <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                      <td>{{order[0]}}</td>
+                      <td>{{order[1]}}</td>
+                      <td>{{order[2]}}</td>
+                      <td>{{order[3]}}</td>
+                      <td>{{order[4]}}</td>
+                      <td>{{order[5]}}</td>
+                      <td>{{order[6]}}</td>
+                      <td>{{order[7]}}</td>
                     
                       {%if not order[9] %}
                       <td>
@@ -150,11 +151,10 @@
                         </form>
                         <form action="/Tauthorize?statuses=Rejected&id={{order[10]}}" method="post">
                           <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
-                        </form>
-                       
+                        </form>                       
                        </div> 
                       </td>
-                      {% elif order[9] == "Accepted" %}
+                        {% elif order[9] == "Accepted" %}
                       <td>
                         Accepted
                       </td>
@@ -162,26 +162,21 @@
                       <td>
                         Rejected
                       </td>
-                      {% endif %}
-                    
-                    
-                    
-              </th>
+                      {% endif %}       
+                  </tr>
+                    {% endfor %}
+                </tbody>
               </tr>
-              {% endfor %}
-              </tbody>
-           
-            
             </tbody>
           </table>
         </div>
-        </div>
       </div>
+    </div>
 
 
       <div class="tab-pane container fade" id="menu1">
 
-        <div class="container mt-3"> 
+        <div class="table-responsive"> 
           <div class="row">
              
             <table class="table table-light table-hover">
@@ -213,19 +208,26 @@
                       <td>{{order[5]}}</td>
                       <td>{{order[6]}}</td>
                       <td>{{order[7]}}</td>
+                       {%if not order[9] %}
                       <td>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                         <form action="/Tauthorize?statuses=Accepted&id={{order.id}}" method="post">
-                           <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
-                         </form>
-                         <form action="/Tauthorize?statuses=Rejected&id={{order.id}}" method="post">
-                           <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
-                         </form>
-                        
-                        </div> 
-                       </td>
-                      
-                    </th>
+                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <form action="/Tauthorize?statuses=Accepted&id={{order[10]}}" method="post">
+                          <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
+                        </form>
+                        <form action="/Tauthorize?statuses=Rejected&id={{order[10]}}" method="post">
+                          <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
+                        </form>                       
+                       </div> 
+                      </td>
+                        {% elif order[9] == "Accepted" %}
+                      <td>
+                        Accepted
+                      </td>
+                      {% else %}
+                      <td>
+                        Rejected
+                      </td>
+                      {% endif %}
                   </tr>
                   {% endfor %}
                 </tbody>
@@ -239,7 +241,7 @@
 
       <div class="tab-pane container fade" id="menu2">
 
-        <div class="container mt-3"> 
+        <div class="table-responsive"> 
           <div class="row">
              
             <table class="table table-light table-hover">
@@ -271,19 +273,26 @@
                       <td>{{order[5]}}</td>
                       <td>{{order[6]}}</td>
                       <td>{{order[7]}}</td>
+                         {%if not order[9] %}
                       <td>
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                         <form action="/Tauthorize?statuses=Accepted&id={{order.id}}" method="post">
-                           <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
-                         </form>
-                         <form action="/Tauthorize?statuses=Rejected&id={{order.id}}" method="post">
-                           <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
-                         </form>
-                        
-                        </div> 
-                       </td>
-                      
-                    </th>
+                       <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <form action="/Tauthorize?statuses=Accepted&id={{order[10]}}" method="post">
+                          <button type="submit" class="btn btn-success"><img src="/static/images/baseline_check_circle_black_24dp.png" width="23" height="23"></button>
+                        </form>
+                        <form action="/Tauthorize?statuses=Rejected&id={{order[10]}}" method="post">
+                          <button type="submit" class="btn btn-danger"><img src="/static/images/baseline_delete_black_24dp.png" width="23" height="23"></button>
+                        </form>                       
+                       </div> 
+                      </td>
+                        {% elif order[9] == "Accepted" %}
+                      <td>
+                        Accepted
+                      </td>
+                      {% else %}
+                      <td>
+                        Rejected
+                      </td>
+                      {% endif %}
                   </tr>
                   {% endfor %}
                 </tbody>
