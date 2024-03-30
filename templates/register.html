@@ -63,28 +63,28 @@
                  <input type="text" name="name" class="form-control" id="inputName" required>
                 </div>
               </div>
-              <script>
-                function validateContactNumber(input) {
-    const contactNumber = input.value;
-    const contactNumberError = document.getElementById('contactNumberError');
-    const valid = /^\d{10}$/.test(contactNumber);
-    if (valid) {
-      contactNumberError.textContent = '';
-      input.setCustomValidity('');
-    } else {
-      contactNumberError.textContent = 'Contact number must be exactly 10 digits';
-      input.setCustomValidity('Contact number must be exactly 10 digits');
-    }
-  }
-              </script>
-
-              <div class="row-md">
-                <div class="col-md-5">
-                 <label for="inputContactNumber" class="form-label">Contact Number</label>
-                 <input type="text" name="contact_number" class="form-control" id="inputContactNumber" required>
-                </div>
-              </div>
-
+           
+<div class="row-md">
+  <div class="col-md-5">
+    <label for="inputContactNumber" class="form-label">Contact Number</label>
+    <input type="text" name="contact_number" class="form-control" id="inputContactNumber" oninput="validateContactNumber(this)" required>
+    <div id="contactNumberError" style="color: red;"></div>
+  </div>
+</div>
+<script>
+  function validateContactNumber(input) {
+const contactNumber = input.value;
+const contactNumberError = document.getElementById('contactNumberError');
+const valid = /^\d{10}$/.test(contactNumber);
+if (valid) {
+contactNumberError.textContent = '';
+input.setCustomValidity('');
+} else {
+contactNumberError.textContent = 'Contact number must be exactly 10 digits';
+input.setCustomValidity('Contact number must be exactly 10 digits');
+  }
+}
+</script>
               <div class="row-md">
                 <div class="col-md-5">
                  <label for="inputEmail" class="form-label">Email</label>
